@@ -21,6 +21,9 @@ public class DeptController {
     @GetMapping("/findById/{id}")
     @HystrixCommand(fallbackMethod = "getFallback")
     public Dept findById (@PathVariable Long id) {
+        if (id == 2) {
+            throw new RuntimeException();
+        }
         return deptService.queryById(id);
     }
     @RequestMapping("/findAll")
